@@ -1,0 +1,38 @@
+#!/bin/bash
+
+# default folders I want
+cd $HOME
+mkdir Projektit
+mkdir Skriptit
+
+# update gpu drivers
+sudo add-apt-repository ppa:graphics-drivers/ppa
+sudo ubuntu-drivers autoinstall
+
+# telegram.
+sudo apt install telegram-desktop
+
+# z shell
+sudo apt install zsh
+chsh -s $(which zsh)
+
+# oh-my-zsh
+sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+# fuzzy finder 
+sudo apt install fzf
+
+# git
+sudo apt install git
+
+# alacritty term
+sudo apt install cargo gcc pkg-config openssl libasound2-dev cmake build-essential python3 libfreetype6-dev libexpat1-dev libxcb-composite0-dev libssl-dev libx11-dev
+bash <(curl -s https://raw.githubusercontent.com/jarvainen/my-system-install/master/install-alacritty)
+# set as default term
+cd /etc/alternatives/ && sudo ln -sfn $HOME/.cargo/bin/alacritty x-terminal-emulator
+
+# vscode
+cd Lataukset/ && wget https://go.microsoft.com/fwlink/?LinkID=760868 && mv index.html\?LinkID\=760868 vscode.deb && sudo apt install ./vscode.deb
+
+# reboot
+reboot
