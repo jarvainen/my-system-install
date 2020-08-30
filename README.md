@@ -6,4 +6,4 @@ https://regolith-linux.org/download/
 
 ## Run
 
-`bash <(curl -s https://raw.githubusercontent.com/jarvainen/my-system-install/master/install)`
+`sudo bash <(curl -s https://raw.githubusercontent.com/jarvainen/my-system-install/master/install)`

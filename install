@@ -10,29 +10,49 @@ sudo add-apt-repository ppa:graphics-drivers/ppa
 sudo ubuntu-drivers autoinstall
 
 # telegram.
-sudo apt install telegram-desktop
+sudo apt -y install telegram-desktop
+
+# git
+sudo apt -y install git
 
 # z shell
-sudo apt install zsh
+sudo apt -y install zsh
 chsh -s $(which zsh)
 
 # oh-my-zsh
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+git clone https://github.com/zsh-users/zsh-autosuggestions.git $ZSH_CUSTOM/plugins/zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
+wget https://raw.githubusercontent.com/jarvainen/my-system-install/master/.zshrc -P $HOME 
 
 # fuzzy finder 
-sudo apt install fzf
-
-# git
-sudo apt install git
+sudo apt -y install fzf
 
 # alacritty term
-sudo apt install cargo gcc pkg-config openssl libasound2-dev cmake build-essential python3 libfreetype6-dev libexpat1-dev libxcb-composite0-dev libssl-dev libx11-dev
+sudo apt -y install cargo gcc pkg-config openssl libasound2-dev cmake build-essential python3 libfreetype6-dev libexpat1-dev libxcb-composite0-dev libssl-dev libx11-dev
 bash <(curl -s https://raw.githubusercontent.com/jarvainen/my-system-install/master/install-alacritty)
-# set as default term
-cd /etc/alternatives/ && sudo ln -sfn $HOME/.cargo/bin/alacritty x-terminal-emulator
 
 # vscode
-cd Lataukset/ && wget https://go.microsoft.com/fwlink/?LinkID=760868 && mv index.html\?LinkID\=760868 vscode.deb && sudo apt install ./vscode.deb
+wget https://go.microsoft.com/fwlink/?LinkID=760868 -O vscode.deb && sudo apt -y install vscode.deb
+
+# chrome
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && sudo apt -y install google-chrome-stable_current_amd64.deb
+
+# docker
+wget https://get.docker.com -o get-docker.sh && sudo sh get-docker.sh
+sudo usermod -aG docker jarvainen
+
+# docker-compose
+sudo curl -L "https://github.com/docker/compose/releases/download/1.26.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+
+# spotify
+curl -sS https://download.spotify.com/debian/pubkey.gpg | sudo apt-key add - 
+echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list
+sudo apt-get update && sudo apt-get install spotify-client
+
+# slack
+wget https://downloads.slack-edge.com/linux_releases/slack-desktop-4.8.0-amd64.deb && sudo apt -y install slack-desktop-4.8.0-amd64.deb
 
 # reboot
 reboot
